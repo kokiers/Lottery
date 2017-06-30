@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <title>刮刮卡</title> 
+
+    <style>
+    html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, input, button{background: none repeat scroll 0 0 transparent; border: 0 none;font-size: 100%;margin: 0;outline: 0 none;padding: 0;vertical-align: baseline;background: transparent;}
+    h1, h2, h3, h4, h5, h6 {font-size: 100%;font-weight: normal;}
+    ul, ol {list-style: none outside none;}
+    body{font-family:"Microsoft Yahei",Tahoma,Geneva,sans-serif;}
+    ul, li{list-style:none;margin:0;padding:0;}
+    .clearfix:after{clear:both;content:".";display:block;font-size:0;height:0;line-height:0;visibility:hidden}
+    .clearfix{zoom:1}
+    a{text-decoration:none;}
+    a,img,i,span,li,div{-webkit-touch-callout: none;-webkit-tap-highlight-color: transparent;-webkit-user-select: none;}
+    *{margin:0;padding:0;}
+    ul li{list-style: none}
+    #lotteryContainer {position:relative;background-repeat:  no-repeat;background-size: 100% 100%;background-color:#ccc;margin: auto; }
+    #lotteryContainer canvas{width: 100%;height: 100%;}
+    #lotteryContainer .unmove{position: absolute;top: 0;left: 0;right: 0;bottom: 0;z-index: 50;display: none;}
+    #lotteryContainer .pti{position: absolute;top:50%;left: 0;text-align: center;width: 100%;font-size: 0.38rem;line-height: 0.55rem;height: 0.55rem;margin-top: -0.5rem;color:#6c3e2c;}
+    </style>
+</head>
+<body>
+
+<div id="lotteryContainer"><div class="unmove"></div></div>  
+<script src='static/canvas_image.js'></script>
+<script src="static/Lottery_k.js"></script>
+<script>    
+    var scbg = "static/scb.jpg";
+    var hbbg = "static/hbb.jpg";
+    var msg ={
+        type:'is_cash2',
+        shicai:'static/1.png'
+    }
+   
+    var Width = document.body.offsetWidth*0.84,Height = Width*0.35;
+    
+    var  lotteryContainer = document.getElementById('lotteryContainer');
+    lotteryContainer.style.width = Width + 'px';
+    lotteryContainer.style.height = Height  + 'px';
+
+    var tScale  = window.devicePixelRatio || parseInt(1);
+
+   
+    function startGame(argument) {
+       
+        if(msg.type=='getbouns'){
+            
+            lotteryContainer.style.backgroundImage = "url("+ hbbg +")";
+            image_type= 'text';
+            var pic = pic1;
+            var pictype='image';
+        }else if(msg.type=='is_cash' || msg.type=='is_getcredit'){   
+
+            lotteryContainer.style.backgroundImage = "url("+ scbg +")";
+            var pic = 'transparent';
+            var pictype='color';
+        }else {
+            lotteryContainer.style.backgroundImage = "url("+ scbg +")";
+            var pic = pic2;
+            var pictype='image';
+        }
+
+        var lottery = new Lottery('lotteryContainer', pic, pictype, Width*tScale, Height*tScale);
+        lottery.tScale = tScale;
+        lottery.txt = 'kokier';
+        image_src = msg.shicai;
+        lottery.init(image_src,'image'); 
+    }
+    startGame();
+    
+</script>
+
+</body>
+</html>
