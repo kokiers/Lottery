@@ -43,6 +43,6 @@ can run in handheld device and pc-web(need support canvas)
 
 
 ##自己项目增加的一点属性或者方法
-1、高清屏幕 增加 devicePixelRatio参数 适配；
-2、在移动端第二屏也可以刮奖
+`1、`高清屏幕 增加 devicePixelRatio参数 适配；
+`2、`在移动端第二屏也可以刮奖
 
